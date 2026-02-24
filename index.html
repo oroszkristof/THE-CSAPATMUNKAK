@@ -15,55 +15,56 @@
         }
 
         h1 {
-            padding: 30px 10px;
+            padding: 15px 10px;   /* Kisebb térköz */
             font-size: 30px;
+            margin-bottom: 10px;  /* Közelebb a gombokhoz */
         }
 
         /* Konténer */
         .kontener {
             display: flex;
-            flex-direction: column; /* Mindig egymás alatt */
+            flex-direction: column;
             align-items: center;
             gap: 20px;
-            padding: 20px;
-            color: red;
+            padding: 10px 20px;   /* Kevesebb felső térköz */
         }
 
         /* Hosszú link doboz */
         .linkdoboz {
-            background-color: #339af0;
-            color: white;
+            background-color: darkblue;
+            color: #ffea00;        /* Erősebb kontraszt */
             text-decoration: none;
-            width: 90%;          /* Hosszú */
-            max-width: 800px;    /* Ne legyen túl széles nagy monitoron */
-            padding: 30px 20px;  /* Magasság */
+            width: 90%;
+            max-width: 800px;
+            padding: 30px 20px;
             font-size: 20px;
             border-radius: 15px;
             transition: 0.3s;
             box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            font-weight: bold;
         }
 
         .linkdoboz:hover {
             background-color: #1c7ed6;
             transform: translateY(-5px);
         }
-        a {
-            color: red;
-        }
 
+        h1, h2, h4 {
+    margin: 0;
+}
     </style>
 </head>
 
 <body>
 
-    <h1><b>CSAPATMUNKÁK</b> <br> <b>Github linkek</b></h1>
+    <h1> THE - CSAPATMUNKÁK</h1><h2>Github linkek </h2> <br><h4>2025/2026 II. félév</h4><br>
     
 
     <div class="kontener">
-        <a href="https://github.com/oroszkristof/Alkalmazasok-Fejlesztese-Projekt-Labor-II.-EYZWG9-FUEBB7" class="linkdoboz"><b>ALKALMAZÁSOK FEJLESZTÉSE PROJEKT LABOR II.</b></a>
-        <a href="https://github.com/oroszkristof/Oktatas-Es-Gamifikacio-Videojatek-Tanulmanyok-EYZWG9-FUEBB7" class="linkdoboz"><b>OKTATÁS ÉS GAMIFIKÁCIÓ, VIDEOJÁTÉK TANULMÁNYOK</b></a>
-        <a href="https://oroszkristof.github.io/Alkalmazasok-Fejlesztese-Projekt-Labor-II.-EYZWG9-FUEBB7/" class="linkdoboz"><b>PROJEKT LABOR II. - WEBLAP</b></a>
-        <a href="https://github.com/oroszkristof/THE-CSAPATMUNKAK" class="linkdoboz"><b>THE - CSAPATMUNKÁK - NYERSANYAGOK</b></a>
+        <a href="https://github.com/oroszkristof/Alkalmazasok-Fejlesztese-Projekt-Labor-II.-EYZWG9-FUEBB7" class="linkdoboz">ALKALMAZÁSOK FEJLESZTÉSE PROJEKT LABOR II.</a>
+        <a href="https://github.com/oroszkristof/Oktatas-Es-Gamifikacio-Videojatek-Tanulmanyok-EYZWG9-FUEBB7" class="linkdoboz">OKTATÁS ÉS GAMIFIKÁCIÓ, VIDEOJÁTÉK TANULMÁNYOK</a>
+        <a href="https://oroszkristof.github.io/Alkalmazasok-Fejlesztese-Projekt-Labor-II.-EYZWG9-FUEBB7/" class="linkdoboz">PROJEKT LABOR II. - WEBLAP</a>
+        <a href="https://github.com/oroszkristof/THE-CSAPATMUNKAK" class="linkdoboz">THE - CSAPATMUNKÁK - NYERSANYAGOK</a>
     </div>
 
 </body>
