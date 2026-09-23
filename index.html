@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Munkaterv</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#f4f4f4;font-family:Arial,Helvetica,sans-serif;color:#222;text-align:center}
+.container{width:min(100% - 32px,1050px);margin:0 auto;padding:16px 0 36px;display:flex;flex-direction:column;align-items:center}
+
+/* Felső valódi kép */
+.header-image{
+  display:block;
+  width:min(100%,760px);
+  aspect-ratio:2/1;
+  height:auto;
+  object-fit:cover;
+  border-radius:14px;
+  box-shadow:0 6px 18px rgba(0,0,0,.16);
+}
+
+/* Munkaterv link */
+.munkaterv-btn{
+  display:inline-block;
+  margin-top:16px;
+  padding:12px 28px;
+  border-radius:12px;
+  background:#d60000;
+  color:#fff;
+  text-decoration:none;
+  font-size:clamp(17px,2.2vw,22px);
+  font-weight:800;
+  letter-spacing:1px;
+  box-shadow:0 6px 15px rgba(0,0,0,.2);
+}
+.munkaterv-btn:hover{background:#b80000}
+.munkaterv-btn:focus-visible,.card:focus-visible,.github-btn:focus-visible,.close:focus-visible{
+  outline:3px solid #2274ff;
+  outline-offset:3px;
+}
+
+.updated{margin:10px 0 22px;font-size:clamp(13px,1.6vw,16px);font-weight:600}
+
+/* Laptop: egymás mellett */
+.cards{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+  justify-content:center;
+}
+.card{
+  display:block;
+  width:100%;
+  aspect-ratio:1/1;
+  padding:0;
+  border:0;
+  border-radius:15px;
+  overflow:hidden;
+  cursor:pointer;
+  background:#ddd;
+  box-shadow:0 6px 18px rgba(0,0,0,.18);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 25px rgba(0,0,0,.24)}
+.card img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* Felugró ablak */
+.modal{
+  display:none;
+  position:fixed;
+  z-index:9999;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  justify-content:center;
+  align-items:center;
+  padding:18px;
+}
+.modal.show{display:flex}
+.modal-content{
+  position:relative;
+  width:min(100%,500px);
+  padding:48px 24px 30px;
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 15px 50px rgba(0,0,0,.4);
+}
+.modal-content h2{margin:0 0 26px;font-size:26px}
+.modal-buttons{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.github-btn{
+  display:inline-block;
+  flex:1 1 180px;
+  padding:16px 20px;
+  border-radius:10px;
+  background:#24292f;
+  color:#fff;
+  text-decoration:none;
+  font-size:17px;
+  font-weight:700;
+}
+.close{
+  position:absolute;
+  right:15px;
+  top:8px;
+  border:0;
+  background:transparent;
+  font-size:38px;
+  cursor:pointer;
+  color:#444;
+}
+
+/* Mobil: minden középen, képek egymás alatt */
+@media(max-width:768px){
+  .container{width:min(100% - 28px,430px);padding-top:10px}
+  .header-image{width:100%}
+  .munkaterv-btn{width:min(100%,260px);padding:11px 16px}
+  .updated{margin-bottom:18px}
+  .cards{grid-template-columns:1fr;gap:14px}
+  .card{width:min(100%,320px);justify-self:center}
+  .modal-buttons{flex-direction:column}
+  .github-btn{width:100%;flex:auto}
+}
+</style>
+</head>
+<body>
+<main class="container">
+
+  <!-- FELSŐ KÉP: a src értékét cseréld a saját képedre -->
+  <img class="header-image" src="focim.png" alt="Munkaterv fejléc">
+
+  <!-- MUNKATERV LINK: a href értékét cseréld a saját linkedre -->
+  <a class="munkaterv-btn"
+     href="https://IDE-JON-A-MUNKATERV-LINK"
+     target="_blank"
+     rel="noopener noreferrer">MUNKATERV</a>
+
+  <div class="updated"><b><i>Utoljára frissítve: 2026. szeptember 24. 11:30</i></b></div>
+
+  <section class="cards">
+    <!-- 1. KÉP: src + a két GitHub link cserélhető -->
+    <button class="card" type="button"
+      onclick="openModal('ROBOTIKA II','https://oroszkristof.github.io/ROBOTIKA-II-EYZWG9-FUEEB7/','https://github.com/oroszkristof/ROBOTIKA-II-EYZWG9-FUEEB7')"
+      aria-label="1. projekt megnyitása">
+      <img src="robotika.png" alt="1. projekt">
+    </button>
+
+    <!-- 2. KÉP -->
+    <button class="card" type="button"
+      onclick="openModal('SZOLGÁLTATÁS - ORIENTÁLT PROGRAMOZÁS','https://oroszkristof.github.io/SZOLGALTATAS-ORIENTALT-PROGRAMOZAS-EYZWG9-FUEEB7/','https://github.com/oroszkristof/SZOLGALTATAS-ORIENTALT-PROGRAMOZAS-EYZWG9-FUEEB7')"
+      aria-label="2. projekt megnyitása">
+      <img src="szolgaltatas.png" alt="2. projekt">
+    </button>
+
+    <!-- 3. KÉP -->
+    <button class="card" type="button"
+      onclick="openModal('3D MODELLEZÉS ÉS JÁTÉKFEJLESZTÉS','https://oroszkristof.github.io/3D-MODELLEZES-ES-JATEKFEJLESZTES-EYZWG9-FUEEB7/','https://github.com/oroszkristof/3D-MODELLEZES-ES-JATEKFEJLESZTES-EYZWG9-FUEEB7')"
+      aria-label="3. projekt megnyitása">
+      <img src="jatekfejlesztes.png" alt="3. projekt">
+    </button>
+  </section>
+</main>
+
+<div id="projectModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-content">
+    <button class="close" type="button" onclick="closeModal()" aria-label="Bezárás">&times;</button>
+    <h2 id="modalTitle">Projekt</h2>
+    <div class="modal-buttons">
+      <a id="githubPage" class="github-btn" href="#" target="_blank" rel="noopener noreferrer">GitHub oldal</a>
+      <a id="githubRepo" class="github-btn" href="#" target="_blank" rel="noopener noreferrer">GitHub repó</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const modal=document.getElementById("projectModal");
+const modalTitle=document.getElementById("modalTitle");
+const githubPage=document.getElementById("githubPage");
+const githubRepo=document.getElementById("githubRepo");
+
+function openModal(title,pageUrl,repoUrl){
+  modalTitle.textContent=title;
+  githubPage.href=pageUrl;
+  githubRepo.href=repoUrl;
+  modal.classList.add("show");
+  document.body.style.overflow="hidden";
+}
+function closeModal(){
+  modal.classList.remove("show");
+  document.body.style.overflow="";
+}
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+</script>
+</body>
+</html>
