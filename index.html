@@ -19,7 +19,7 @@
     }
 
     body {
-      background: #f4f4f4;
+      background: #eaf6ff;
       font-family: Arial, Helvetica, sans-serif;
       color: #222;
       text-align: center;
@@ -52,6 +52,14 @@
     /* =========================
        MUNKATERV GOMB
        ========================= */
+
+    .top-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
     .munkaterv-btn {
       display: inline-block;
@@ -89,9 +97,35 @@
        ========================= */
 
     .updated {
-      margin: 10px 0 22px;
+      margin: 10px 0 12px;
       font-size: clamp(13px, 1.6vw, 16px);
       font-weight: 600;
+    }
+
+
+    .notice-box {
+      width: min(100%, 380px);
+      margin: -2px 0 8px;
+      padding: 5px 9px;
+      border: 1px solid #e2b100;
+      border-radius: 10px;
+      background: #fff6cc;
+      font-size: clamp(10px, 1.2vw, 12px);
+      line-height: 1.35;
+      font-weight: 700;
+      font-style: italic;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, .08);
+    }
+
+    .notice-box strong {
+      color: #b80000;
+    }
+
+    .notice-box a {
+      color: #b80000;
+      font-weight: 800;
+      font-style: italic;
+      white-space: nowrap;
     }
 
 
@@ -118,7 +152,7 @@
 
       padding: 0;
       border: 0;
-      border-radius: 15px;
+      border-radius: 12px;
 
       overflow: hidden;
 
@@ -209,7 +243,7 @@
 
       justify-content: center;
 
-      gap: 14px;
+      gap: 10px;
 
       flex-wrap: wrap;
     }
@@ -394,13 +428,13 @@
       /* Munkaterv */
 
       .munkaterv-btn {
-        width: min(100%, 260px);
+        width: min(48%, 200px);
 
         padding: 11px 16px;
       }
 
       .updated {
-        margin-bottom: 18px;
+        margin-bottom: 12px;
       }
 
       /* Képek egymás alatt */
@@ -485,13 +519,23 @@
          MUNKATERV GOMB
          ========================= -->
 
-    <button
-      class="munkaterv-btn"
-      type="button"
-      onclick="openWorkplanModal()"
-    >
-      MUNKATERV
-    </button>
+    <div class="top-buttons">
+      <button
+        class="munkaterv-btn"
+        type="button"
+        onclick="openWorkplanModal()"
+      >
+        MUNKATERV
+      </button>
+
+      <a
+        class="munkaterv-btn"
+        href="https://drive.google.com/file/d/1n1f4J79WzRV05eqww8F2wsRDNpSKMNVT/view?usp=sharing"
+        style="text-decoration: none;"
+      >
+        HATÁRIDŐK
+      </a>
+    </div>
 
 
     <!-- =========================
@@ -503,12 +547,16 @@
       <b>
         <i>
           Utoljára frissítve:
-          2026. szeptember 27. 12:00
+          2026. szeptember 30. 21:00
         </i>
       </b>
 
     </div>
-
+<!-----
+    <div class="notice-box">
+      <b>A munkatervek és a határidők közös megegyezéssel elfogadásra kerültek. </b>  <a href="#"><b>Részletek itt!</b></a>
+    </div><br>
+---->
 
     <!-- =========================
          HÁROM TANTÁRGY KÉPE
@@ -750,15 +798,15 @@
 
         <h3>
           3D MODELLEZÉS ÉS JÁTÉKFEJLESZTÉS
-        </h3>
-
+        <p style="font-size: 12px;"><b><i>Utoljára frissítve: 2026. szeptember 30. 21:00</i></b></p>
+          </h3>
         <a
-          class="workplan-link"
-          href="#"
+          class="workplan-link2"
+          href="https://drive.google.com/file/d/11vLvSW13N_HHWv1c9gma7tknk7qxAeH3/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Nem elérhető...
+          MEGNÉZEM
         </a>
 
       </div>
