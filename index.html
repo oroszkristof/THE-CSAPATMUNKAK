@@ -644,6 +644,54 @@
       .deadline-note { font-size: 11px; margin-bottom: 9px; }
       .deadline-ok { padding: 7px 30px; font-size: 14px; }
     }
+
+    /* Modern, animált félévzáró figyelmeztetés */
+    .deadline-overlay {
+      background: repeating-linear-gradient(135deg, rgba(255,235,238,.86) 0 24px, rgba(255,190,199,.74) 24px 27px, rgba(255,245,246,.86) 27px 52px), rgba(100,0,0,.35);
+      backdrop-filter: blur(5px);
+      overflow: hidden;
+    }
+    .deadline-dialog {
+      position: relative; overflow: hidden;
+      width: min(100%, 510px); max-height: calc(100dvh - 32px);
+      padding: clamp(28px, 6vw, 46px) clamp(18px, 5vw, 38px);
+      border: 3px solid #dc172b; border-radius: 24px;
+      background: repeating-linear-gradient(145deg, #fff 0 30px, #fff4f5 30px 60px);
+      box-shadow: 0 25px 75px rgba(105,0,20,.32), 0 0 0 7px rgba(255,255,255,.45);
+      animation: deadlineEnter .65s cubic-bezier(.18,.85,.22,1.08) both;
+    }
+    .deadline-dialog::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(125deg, transparent 38%, rgba(230,30,55,.10) 39%, rgba(230,30,55,.10) 45%, transparent 46%);
+    }
+    .deadline-dialog > * { position: relative; }
+    .deadline-kicker { display: inline-block; margin: 0 0 17px; padding: 8px 16px;
+      border-radius: 50px; background: #ffe2e6; color: #ad0920;
+      font-size: 13px; font-weight: 900; letter-spacing: .12em; }
+    .deadline-dialog h2 { margin: 0 0 12px; color: #b60923;
+      font-size: clamp(30px, 7vw, 46px); font-weight: 900; line-height: 1.13;
+      letter-spacing: -.035em; text-shadow: 0 2px 0 #fff; }
+    .deadline-dialog h2 span { display: block; font-size: clamp(21px, 5vw, 31px); margin-top: 10px; }
+    .deadline-description { margin: 18px auto 26px; max-width: 350px;
+      color: #7d2431; font-size: clamp(15px, 3vw, 17px); line-height: 1.5; font-weight: 600; }
+    .deadline-cta { display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; min-height: 66px; padding: 15px 18px; border-radius: 14px;
+      background: linear-gradient(135deg, #e32138, #ad061e); color: #fff;
+      text-decoration: none; font-size: clamp(14px, 3.2vw, 18px); font-weight: 900;
+      line-height: 1.35; box-shadow: 0 9px 22px rgba(173,6,30,.28);
+      transition: transform .2s, box-shadow .2s; }
+    .deadline-cta:hover { transform: translateY(-3px); box-shadow: 0 14px 28px rgba(173,6,30,.36); }
+    .deadline-cta:focus-visible, .deadline-dismiss:focus-visible { outline: 3px solid #2563eb; outline-offset: 4px; }
+    .deadline-dismiss { display: block; margin: 20px auto 0; padding: 7px 15px;
+      border: 0; background: transparent; color: #8c3541; font: 700 14px Arial, sans-serif;
+      text-decoration: underline; cursor: pointer; }
+    .deadline-dialog.is-leaving { animation: deadlineExit .48s ease-in both; }
+    @keyframes deadlineEnter { from { opacity: 0; transform: translateX(-110vw) rotate(-5deg); } to { opacity: 1; transform: translateX(0) rotate(0); } }
+    @keyframes deadlineExit { to { opacity: 0; transform: translateX(110vw) rotate(5deg); } }
+    @media (prefers-reduced-motion: reduce) {
+      .deadline-dialog, .deadline-dialog.is-leaving { animation-duration: .01ms; }
+      .deadline-cta { transition: none; }
+    }
   </style>
 </head>
 
@@ -651,28 +699,14 @@
 <body>
 
 
-  <!-- FONTOS HATÁRIDŐK: belépéskor megjelenő figyelmeztetés -->
-  <div id="deadlineOverlay" class="deadline-overlay" role="dialog" aria-modal="true" aria-labelledby="deadlineTitle">
-    <div class="deadline-dialog">
-      <h2 id="deadlineTitle">HALI! JÓ, HOGY ITT VAGY ÚJRA! :) <br> 📢 KÖZELGŐ HATÁRIDŐK 📢</h2>
-      <section class="deadline-group">
-        <h3>RADVÁNSZKY ÁDÁM JÁNOS <br><span style="color: blue;"text-decoration: none;><i>Változtatás kérésre...</i></span></h3>
-        
-        <div class="deadline-line"><span>3D MODELLEZÉS ÉS JÁTÉKFEJLESZTÉS</span><time>2026.10.28. 23:59</time><time>2026.11.06. 23:59</time></div>
-        
-        <div class="deadline-line"><span>SZOLGÁLTATÁS – ORIENTÁLT PROGRAMOZÁS</span><time>2026.11.08. 23:59</time></div>
-        <div class="deadline-line"><span>ROBOTIKA</span><time>2026.11.06. 23:59</time></div>
-      </section>
-      <section class="deadline-group">
-        <h3>OROSZ KRISTÓF</h3>
-        <div class="deadline-line"><span>3D MODELLEZÉS ÉS JÁTÉKFEJLESZTÉS</span><time>2026.11.02. 23:59</time><time>2026.11.06. 23:59</time></div>
-                <div class="deadline-line"><span>SZOLGÁLTATÁS – ORIENTÁLT PROGRAMOZÁS</span><time>2026.11.08. 23:59</time></div>
-        <div class="deadline-line"><span>ROBOTIKA</span><time>2026.11.15. 23:59</time></div>
-
-      
-      </section>
-      <p class="deadline-note">A további részletek a weboldalunkon a <strong>munkaterv</strong> menüpont alatt!</p>
-      <button type="button" class="deadline-ok" id="deadlineOk">Rendben</button>
+  <!-- Félévzáró, belépéskor megjelenő figyelmeztetés -->
+  <div id="deadlineOverlay" class="deadline-overlay" role="dialog" aria-modal="true" aria-labelledby="deadlineTitle" aria-describedby="deadlineDescription">
+    <div class="deadline-dialog" id="deadlineDialog">
+      <p class="deadline-kicker">⏰ FONTOS FIGYELMEZTETÉS</p>
+      <h2 id="deadlineTitle">CÉLEGYENESBEN!<span>ITT A FÉLÉV VÉGE!</span></h2>
+      <p class="deadline-description" id="deadlineDescription">Ne maradj le a fontos határidőkről!</p>
+      <a class="deadline-cta" id="deadlineLink" href="https://drive.google.com/file/d/1Z2L8DiVxPEorKWNIkRpSulmX5-1xqv2j/view?usp=sharing">MEGNÉZEM A KÖZELGŐ HATÁRIDŐIMET! <span aria-hidden="true">➜</span></a>
+      <button type="button" class="deadline-dismiss" id="deadlineOk">BEZÁRÁS</button>
     </div>
   </div>
 
@@ -1095,16 +1129,23 @@
        ========================================== -->
 
   <script>
-    /* Figyelmeztetés: kizárólag a Rendben gomb zárja be. */
+    /* Belépő animáció balról, kilépő animáció jobbra. */
     const deadlineOverlay = document.getElementById('deadlineOverlay');
+    const deadlineDialog = document.getElementById('deadlineDialog');
     const deadlineOk = document.getElementById('deadlineOk');
     document.body.style.overflow = 'hidden';
-    deadlineOk.focus();
-    deadlineOk.addEventListener('click', function () {
-      deadlineOverlay.hidden = true;
-      document.body.style.overflow = '';
-    });
-
+    deadlineOk.focus({preventScroll: true});
+    function dismissDeadline() {
+      if (deadlineDialog.classList.contains('is-leaving')) return;
+      deadlineDialog.classList.add('is-leaving');
+      const finish = () => {
+        deadlineOverlay.hidden = true;
+        document.body.style.overflow = '';
+      };
+      deadlineDialog.addEventListener('animationend', finish, {once: true});
+      setTimeout(() => { if (!deadlineOverlay.hidden) finish(); }, 650);
+    }
+    deadlineOk.addEventListener('click', dismissDeadline);
 
     /* =========================
        PROJEKT MODÁL
