@@ -681,6 +681,8 @@
       line-height: 1.35; box-shadow: 0 9px 22px rgba(173,6,30,.28);
       transition: transform .2s, box-shadow .2s; }
     #documentDeadlineLink { margin-top: 12px; }
+    #extraDeadlineLink { margin-top: 12px; background: linear-gradient(135deg, #2563eb, #1742a0); box-shadow: 0 9px 22px rgba(37,99,235,.28); }
+    #extraDeadlineLink:hover { box-shadow: 0 14px 28px rgba(37,99,235,.36); }
     .deadline-cta:hover { transform: translateY(-3px); box-shadow: 0 14px 28px rgba(173,6,30,.36); }
     .deadline-cta:focus-visible, .deadline-dismiss:focus-visible { outline: 3px solid #2563eb; outline-offset: 4px; }
     .deadline-dismiss { display: block; margin: 20px auto 0; padding: 7px 15px;
@@ -692,6 +694,26 @@
     @media (prefers-reduced-motion: reduce) {
       .deadline-dialog, .deadline-dialog.is-leaving { animation-duration: .01ms; }
       .deadline-cta { transition: none; }
+    }
+    /* A teljes felugró ablak lehetőleg görgetés nélkül férjen el. */
+    .deadline-dialog { box-sizing: border-box; max-height: calc(100dvh - 20px); overflow-y: auto; }
+    @media (max-height: 850px) {
+      .deadline-dialog { padding-top: clamp(12px, 3dvh, 26px); padding-bottom: clamp(12px, 3dvh, 26px); }
+      .deadline-kicker { margin-bottom: 9px; padding: 5px 12px; }
+      .deadline-dialog h2 { font-size: clamp(23px, 5dvh, 38px); margin-bottom: 7px; }
+      .deadline-dialog h2 span { font-size: clamp(17px, 3.4dvh, 25px); margin-top: 4px; }
+      .deadline-description { margin: 8px auto 13px; font-size: clamp(12px, 2.2dvh, 16px); }
+      .deadline-cta { min-height: clamp(40px, 7dvh, 58px); padding: 9px 12px; font-size: clamp(12px, 2.2dvh, 17px); }
+      #documentDeadlineLink, #extraDeadlineLink { margin-top: 8px; }
+    }
+    @media (max-height: 520px) {
+      .deadline-dialog { padding: 8px 12px; }
+      .deadline-kicker { font-size: 10px; margin-bottom: 4px; }
+      .deadline-dialog h2 { font-size: 21px; }
+      .deadline-dialog h2 span { font-size: 15px; }
+      .deadline-description { margin: 5px auto 8px; font-size: 12px; }
+      .deadline-cta { min-height: 34px; padding: 6px 10px; font-size: 12px; }
+      #documentDeadlineLink, #extraDeadlineLink { margin-top: 6px; }
     }
   </style>
 </head>
@@ -706,8 +728,9 @@
       <p class="deadline-kicker">⏰ FONTOS FIGYELMEZTETÉS</p>
       <h2 id="deadlineTitle">CÉLEGYENESBEN!<span>ITT A FÉLÉV VÉGE!</span></h2>
       <p class="deadline-description" id="deadlineDescription">Ne maradj le a fontos határidőkről!</p>
-      <a class="deadline-cta" id="deadlineLink" href="https://drive.google.com/file/d/1XG_tpw1f2PcP4HO_lvbQWerr1QLC-MxH/view?usp=sharing">MEGNÉZEM A KÖZELGŐ HATÁRIDŐIMET! <span aria-hidden="true">➜</span></a>
+      <a class="deadline-cta" id="deadlineLink" href="https://drive.google.com/file/d/1dgcxgCfeEgX2ruqTyh9E5vM8HKyDSXVQ/view?usp=sharing">MEGNÉZEM A KÖZELGŐ HATÁRIDŐIMET! <span aria-hidden="true">➜</span></a>
       <a class="deadline-cta" id="documentDeadlineLink" href="https://drive.google.com/file/d/1wny9aM9TI2rdnmc5rGPUiz1I85FXo7YO/view?usp=sharing">DOKUMENTUMOK ELKÉSZÍTÉSÉNEK HATÁRIDEJE <span aria-hidden="true">➜</span></a>
+      <a class="deadline-cta" id="extraDeadlineLink" href="https://drive.google.com/drive/folders/1yDv7JzYIgKUhrTm3kYg70YNlxjQcs5Uv?usp=drive_link">TANTÁRGYAK DRIVE MAPPÁJA <span aria-hidden="true">➜</span></a>
       <button type="button" class="deadline-dismiss" id="deadlineOk">BEZÁRÁS</button>
     </div>
   </div>
